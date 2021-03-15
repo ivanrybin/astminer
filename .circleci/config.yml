@@ -2,19 +2,13 @@ version: 2.1
 jobs:
   # build with machine executor
   build:
-    machine:
-      enabled: true
     working_directory: ~/astminer
     # python parser PATH variable
     environment:
       pythonparser: /tmp/pythonparser
+    docker:
+      - image: circleci/python:3.8
     steps:
-      - run: 
-          name: Switch to Python 3.8
-          command: |
-            pyenv versions
-            pyenv global 3.8.0
-            sudo apt install python3-pip
       - run: 
           name: Installing backend - pythonparser for GumTree
           command: |
