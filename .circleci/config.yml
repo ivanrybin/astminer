@@ -10,7 +10,13 @@ jobs:
       pythonparser: /tmp/pythonparser
     steps:
       - run: 
-          name: installing pythonparser 
+          name: Switch to Python 3.8
+          command:
+            pyenv versions
+            pyenv global 3.8.0
+            sudo apt install python3-pip
+      - run: 
+          name: Installing backend - pythonparser for GumTree
           command: |
                 git clone https://github.com/JetBrains-Research/pythonparser
                 pip3 install -r pythonparser/requirements.txt
