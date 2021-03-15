@@ -12,8 +12,9 @@ jobs:
       - run:
           name: Installing backend - pythonparser for GumTree
           command: |
+            pwd
             git clone https://github.com/JetBrains-Research/pythonparser pythonparser_tmp_dir
-            pip3 install -r pythonparser/requirements.txt
+            pip3 install -r ~/astminer/pythonparser_tmp_dir/requirements.txt
             mv ~/astminer/pythonparser_tmp_dir/src/main/python/pythonparser_3.py /tmp/pythonparser
             chmod +x /tmp/pythonparser
       - checkout:
