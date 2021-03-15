@@ -2,16 +2,23 @@ version: 2.1
 jobs:
   # build with machine executor
   build:
+    machine:
+      enabled: true
     working_directory: ~/astminer
     # python parser PATH variable
     environment:
       pythonparser: /tmp/pythonparser
-    docker:
-      - image: circleci/openjdk:8u252-jdk
-      - image: circleci/python:3.8
     steps:
       - checkout:
           path: ~/astminer
+      - run:
+          name: Installing Python 3.8
+          command: |
+            sudo apt-get update
+            sudo apt-get install python3.8
+            sudo apt-get -y install python3-pip
+            pip3 --version
+            python3 --version
       - run:
           name: Installing backend - pythonparser for GumTree
           command: |
