@@ -22,6 +22,7 @@ jobs:
           path: ~/astminer
       - run: ./gradlew bintrayUpload "-PbranchName=$GIT_BRANCH"
 
+
   release-dev:
     machine:
       enabled: true
