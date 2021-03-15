@@ -14,7 +14,7 @@ jobs:
           command: |
                 git clone https://github.com/JetBrains-Research/pythonparser
                 pip3 install -r pythonparser/requirements.txt
-                mv pythonparser/src/main/python/pythonparser_3.py /tmp/pythonparser
+                mv ./pythonparser/src/main/python/pythonparser_3.py /tmp/pythonparser
                 chmod +x /tmp/pythonparser
       - checkout:
           path: ~/astminer
