@@ -26,8 +26,6 @@ jobs:
             pwd
             ls -l /usr/bin/python*
             sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
-            alias python='/usr/bin/python3.8'
-            . ~/.bashrc
             pip3 --version
             python3 --version
             python --version
@@ -40,17 +38,16 @@ jobs:
             pip3 install -r pythonparser_tmp_dir/requirements.txt
             mv pythonparser_tmp_dir/src/main/python/pythonparser/pythonparser_3.py /tmp/pythonparser
             chmod +x /tmp/pythonparser
-            ls /tmp
-      - run:
-          name: Setup Environment Variables
-          command: |
-            echo "export PATH=$PATH:/tmp/pythonparser" >> $BASH_ENV
-            echo $PATH
-            echo $BASH_ENV
+            ls -l /tmp
       - run: 
           environment: 
             pythonparser: /tmp/pythonparser
-          command: ./gradlew build --stacktrace
+          command: |
+              export PATH=$PATH:/tmp
+              echo "export PATH=$PATH:/tmp" >> $BASH_ENV
+              echo $PATH
+              echo $BASH_ENV
+              ./gradlew build --stacktrace
 
   # release
   release:
