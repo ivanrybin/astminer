@@ -19,8 +19,11 @@ jobs:
             sudo apt-get update
             sudo apt-get install python3.8
             sudo apt-get -y install python3-pip
+            alias python='/usr/bin/python3.8'
+            . ~/.bashrc
             pip3 --version
             python3 --version
+            python --version
       - run:
           name: Installing backend - pythonparser for GumTree
           command: |
@@ -29,7 +32,14 @@ jobs:
             pip3 install -r pythonparser_tmp_dir/requirements.txt
             mv pythonparser_tmp_dir/src/main/python/pythonparser/pythonparser_3.py /tmp/pythonparser
             chmod +x /tmp/pythonparser
-      - run: ./gradlew build --stacktrace
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export PATH=$PATH:/tmp/pythonparser" >> $BASH_ENV
+      - run: 
+          environment: 
+            pythonparser: /tmp/pythonparser
+          command: ./gradlew build --stacktrace
 
   # release
   release:
