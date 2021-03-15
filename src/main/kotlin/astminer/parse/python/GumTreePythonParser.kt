@@ -16,6 +16,7 @@ class GumTreePythonParser : Parser<GumTreePythonNode> {
         val context = PythonTreeGenerator().generate(InputStreamReader(content))
         wrapGumTreeNode(context)
     } catch (e: Exception) {
+        e.printStackTrace()
         null
     }
 }
