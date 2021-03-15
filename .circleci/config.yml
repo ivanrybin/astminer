@@ -15,7 +15,8 @@ jobs:
             pwd
             git clone https://github.com/JetBrains-Research/pythonparser pythonparser_tmp_dir
             pip3 install -r ~/astminer/pythonparser_tmp_dir/requirements.txt
-            mv ~/astminer/pythonparser_tmp_dir/src/main/python/pythonparser_3.py /tmp/pythonparser
+            mv ~/astminer/pythonparser_tmp_dir/src/main/python/pythonparser/pythonparser_3.py /tmp/pythonparser
+            ls
             chmod +x /tmp/pythonparser
       - checkout:
           path: ~/astminer
