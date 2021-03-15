@@ -3,7 +3,7 @@ jobs:
   # build with machine executor
   build:
     machine:
-      image: ubuntu-2004:202101-0
+      image: ubuntu-1604:202101-01
     working_directory: ~/astminer
     # python parser PATH variable
     environment:
