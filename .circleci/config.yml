@@ -6,8 +6,8 @@ jobs:
       image: ubuntu-1604:202101-01
     working_directory: ~/astminer
     # python parser PATH variable
-    environment:
-      pythonparser: /tmp/pythonparser
+    # environment:
+    #   pythonparser: /tmp
     steps:
       - checkout:
           path: ~/astminer
@@ -19,17 +19,14 @@ jobs:
             sudo apt-get update
             sudo apt-get install python3.8
             sudo apt-get -y install python3-pip
-            ls /usr/bin
+            ls -l /usr/bin/python*
       - run:
           name: Switch Python version
           command: |
-            pwd
-            ls -l /usr/bin/python*
             sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
             pip3 --version
             python3 --version
             python --version
-            pwd
       - run:
           name: Installing backend - pythonparser for GumTree
           command: |
@@ -40,11 +37,8 @@ jobs:
             chmod +x /tmp/pythonparser
             ls -l /tmp
       - run: 
-          environment: 
-            pythonparser: /tmp/pythonparser
           command: |
               export PATH=$PATH:/tmp
-              echo "export PATH=$PATH:/tmp" >> $BASH_ENV
               echo $PATH
               echo $BASH_ENV
               ./gradlew build --stacktrace
