@@ -20,15 +20,9 @@ jobs:
             sudo apt-get install python3.8
             sudo apt-get -y install python3-pip
             ls -l /usr/bin/python*
-      # - run:
-      #     name: Switch Python version
-      #     command: |
-      #       sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
-      #       pip3 --version
-      #       python3 --version
-      #       python --version
+            python3 --version
       - run:
-          name: Installing backend - pythonparser for GumTree
+          name: Installing backend GumTree parser for Python
           command: |
             pwd
             git clone https://github.com/JetBrains-Research/pythonparser pythonparser_tmp_dir
@@ -36,11 +30,14 @@ jobs:
             mv pythonparser_tmp_dir/src/main/python/pythonparser/pythonparser_3.py /tmp/pythonparser
             chmod +x /tmp/pythonparser
             ls -l /tmp
-      - run: 
+      - run:
+          name: Python parser to PATH
           command: |
-              export PATH=$PATH:/tmp
-              echo $PATH
-              echo $BASH_ENV
+            export PATH=$PATH:/tmp
+            echo $PATH
+      - run: 
+          name: Build and tests
+          command: |
               ./gradlew build --stacktrace
 
   # release
