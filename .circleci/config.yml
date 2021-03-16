@@ -16,16 +16,16 @@ jobs:
             mv pythonparser_tmp_dir/src/main/python/pythonparser/pythonparser_3.py /tmp/pythonparser
             chmod +x /tmp/pythonparser
       - run: 
+          # for using pythonparser we need /tmp folder in PATH variable
           name: Build
           command: |
-              # for using pythonparser we need /tmp folder in PATH variable
               export PATH=$PATH:/tmp
-              ./gradlew --parallel build --stacktrace
+              ./gradlew build --stacktrace
       - run:
           name: Test
           command: |
               export PATH=$PATH:/tmp
-              ./gradlew --parallel test --stacktrace
+              ./gradlew test --stacktrace
 
   # release
   release:
