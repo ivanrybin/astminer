@@ -20,12 +20,12 @@ jobs:
           command: |
               # for using pythonparser we need /tmp folder in PATH variable
               export PATH=$PATH:/tmp
-              ./gradlew build --stacktrace
+              ./gradlew --parallel build --stacktrace
       - run:
           name: Test
           command: |
               export PATH=$PATH:/tmp
-              ./gradlew test --stacktrace
+              ./gradlew --parallel test --stacktrace
 
   # release
   release:
