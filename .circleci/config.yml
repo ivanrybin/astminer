@@ -5,9 +5,6 @@ jobs:
     machine:
       image: ubuntu-1604:202101-01
     working_directory: ~/astminer
-    # python parser PATH variable
-    # environment:
-    #   pythonparser: /tmp
     steps:
       - checkout:
           path: ~/astminer
@@ -23,6 +20,7 @@ jobs:
             python3 --version
       - run:
           name: Installing backend GumTree parser for Python
+          # for using pythonparser we need /tmp folder in PATH variable
           command: |
             pwd
             git clone https://github.com/JetBrains-Research/pythonparser pythonparser_tmp_dir
@@ -30,15 +28,13 @@ jobs:
             mv pythonparser_tmp_dir/src/main/python/pythonparser/pythonparser_3.py /tmp/pythonparser
             chmod +x /tmp/pythonparser
             ls -l /tmp
-      - run:
-          name: Python parser to PATH
-          command: |
-            export PATH=$PATH:/tmp
-            echo $PATH
       - run: 
           name: Build and tests
           command: |
+              export PATH=$PATH:/tmp
+              echo $PATH 
               ./gradlew build --stacktrace
+              ./gradlew test --stacktrace
 
   # release
   release:
